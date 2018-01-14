@@ -3,7 +3,7 @@ export const ADD_RECIPE = 'ADD_RECIPE';
 export const REMOVE_FROM_CALENDER = 'REMOVE_FROM_CALENDER';
 
 /**
- * Action creator that creates an action indicating an a new recipe.
+ * Action creator that creates an action indicating a new recipe.
  * @method addRecipe
  * @param  {string} day - The day of the recipe.
  * @param  {string} recipe - The steps to cook the meal.
