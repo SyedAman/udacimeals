@@ -13,4 +13,18 @@ class App extends Component {
 	}
 }
 
+const mapStateToProps = (calendar) => {
+	const days = ['sunday', 'monday', 'tuesday', 'thursday', 'friday', 'saturday'];
+
+	return {
+		calender: days.map(day => ({
+			day,
+			meals: Object.keys(calendar[day]).reduce((meals, meal) => ({
+				...meals,
+				[meal]: 
+			}))
+		}))
+	}
+}
+
 export default connect()(App);
