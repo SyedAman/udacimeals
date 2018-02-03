@@ -25,7 +25,7 @@ const mapStateToProps = calendar => {
 	];
 
 	return {
-		calender: days.map(day => ({
+		calendar: days.map(day => ({
 			day,
 			meals: Object.keys(calendar[day]).reduce((meals, meal) => ({
 				...meals,
