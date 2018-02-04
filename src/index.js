@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import reducer from './reducers';
+import rootReducer from './reducers';
 import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
@@ -13,7 +13,7 @@ import registerServiceWorker from './registerServiceWorker';
  * @type {object}
  */
 const store = createStore(
-	reducer,
+	rootReducer,
 	// integrate store with Redux Dev Tools
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
