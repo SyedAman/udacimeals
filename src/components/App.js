@@ -38,13 +38,29 @@ class App extends Component {
 
 					{/* fill in the calendar */}
 					<div className="icon-grid">
-						{calendar.map(({ day }) => (
+						{calendar.map(({ day, meals }) => (
 							<ul key={day}>
 								{mealOrder.map(mealType => (
 									<li key={mealType} className="meal">
-										<button className="icon-btn">
-											<CalendarIcon size={30} />
-										</button>
+										{meals[mealType] ? (
+											<div className="food-item">
+												<img
+													src={meals[mealType].image}
+													alt={meals[mealType].label}
+												/>
+												<button
+													onClick={() =>
+														boundRemoveFromCalendar({ mealType, day })
+													}
+												>
+													Clear
+												</button>
+											</div>
+										) : (
+											<button className="icon-btn">
+												<CalendarIcon size={30} />
+											</button>
+										)}
 									</li>
 								))}
 							</ul>
