@@ -1,15 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o';
 
 import { addRecipe, removeFromCalender } from '../actions';
+import { capitalize } from '../utils/helpers';
 import '../App.css';
 
 class App extends Component {
 	render() {
-		console.log(this.props.calendar);
+		const { calendar, boundRemoveFromCalendar } = this.props;
+		/**
+		 * The meals to be displayed the information of.
+		 * @type {Array}
+		 */
+		const mealOrder = ['breakfast', 'lunch', 'dinner'];
+
 		return (
-			<div>
-				<h1>Learning Redux!</h1>
+			<div className="container">
+				<ul className="meal-types">
+					{mealOrder.map(mealType => (
+						<li key={mealType} className="subheader">
+							{capitalize(mealType)}
+						</li>
+					))}
+				</ul>
+
+				<div className="calendar">
+					<div className="days">
+						{calendar.map(({ day }) => (
+							<h3 key={day} className="subheader">
+								{capitalize(day)}
+							</h3>
+						))}
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -21,7 +45,7 @@ class App extends Component {
  * @param  {Object} calendar - A property in the redux store state.
  * @return {Object} - Available props to be used to read from the store.
  */
-const mapStateToProps = calendar => ({
+const mapStateToProps = ({ calendar }) => ({
 	calendar: Object.keys(calendar).map(day => ({ day, meals: calendar[day] })),
 });
 
