@@ -17,6 +17,7 @@ class App extends Component {
 
 		return (
 			<div className="container">
+				{/* display the different meal types in the x axis */}
 				<ul className="meal-types">
 					{mealOrder.map(mealType => (
 						<li key={mealType} className="subheader">
@@ -25,12 +26,28 @@ class App extends Component {
 					))}
 				</ul>
 
+				{/* display all the days in the week in the y axis */}
 				<div className="calendar">
 					<div className="days">
 						{calendar.map(({ day }) => (
 							<h3 key={day} className="subheader">
 								{capitalize(day)}
 							</h3>
+						))}
+					</div>
+
+					{/* fill in the calendar */}
+					<div className="icon-grid">
+						{calendar.map(({ day }) => (
+							<ul key={day}>
+								{mealOrder.map(mealType => (
+									<li key={mealType} className="meal">
+										<button className="icon-btn">
+											<CalendarIcon size={30} />
+										</button>
+									</li>
+								))}
+							</ul>
 						))}
 					</div>
 				</div>
