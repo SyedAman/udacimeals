@@ -7,6 +7,14 @@ import { capitalize } from '../utils/helpers';
 import '../App.css';
 
 class App extends Component {
+	state = {
+		isLoading: false,
+		isModalOpen: false,
+		meal: null,
+		day: null,
+		food: null,
+	};
+
 	render() {
 		const { calendar, boundRemoveFromCalendar } = this.props;
 		/**
