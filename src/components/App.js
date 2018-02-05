@@ -8,6 +8,7 @@ import ArrowRightIcon from 'react-icons/lib/fa/arrow-circle-right';
 import { addRecipe, removeFromCalender } from '../actions';
 import { capitalize } from '../utils/helpers';
 import '../App.css';
+import { fetchRecipes } from '../utils/api';
 
 class App extends Component {
 	/**
@@ -65,6 +66,29 @@ class App extends Component {
 			day: null,
 			food: null,
 		}));
+	};
+
+	/**
+	 * Searches for the queried food using the edamam api.
+	 * @method searchForFood
+	 * @param  {Object} event - Native DOM event.
+	 * @return {Undefined}
+	 */
+	searchForFood = async event => {
+		// don't search if user hasn't typed anything
+		if (!this.input.value) return;
+
+		event.preventDefault();
+
+		try {
+			this.setState(() => ({ isLoading: true }));
+
+			// search the food using the edamam api
+			const food = await fetchRecipes(this.input.value);
+			this.setState(() => ({ food, isLoading: false }));
+		} catch (error) {
+			throw new Error(error);
+		}
 	};
 
 	render() {
