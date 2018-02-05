@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o';
 import Modal from 'react-modal';
+import Loading from 'react-loading';
 
 import { addRecipe, removeFromCalender } from '../actions';
 import { capitalize } from '../utils/helpers';
@@ -141,7 +142,14 @@ class App extends Component {
 					isOpen={isModalOpen}
 					onRequestClose={this.closeModal}
 					contentLabel="Modal"
-				/>
+				>
+					<Loading
+						delay={200}
+						type="spin"
+						color="#4fd65d"
+						className="loading"
+					/>
+				</Modal>
 			</div>
 		);
 	}
