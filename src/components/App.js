@@ -87,7 +87,7 @@ class App extends Component {
 			const food = await fetchRecipes(this.input.value);
 			this.setState(() => ({ food, isLoading: false }));
 		} catch (error) {
-			throw new Error(error);
+			throw new Error('failed to search for food!', error);
 		}
 	};
 
@@ -188,7 +188,7 @@ class App extends Component {
 								placeholder="Search Foods"
 								ref={input => (this.input = input)}
 							/>
-							<button className="icon-btn">
+							<button onClick={this.searchForFood} className="icon-btn">
 								<ArrowRightIcon size={30} />
 							</button>
 						</div>
