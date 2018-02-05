@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o';
+import Modal from 'react-modal';
 
 import { addRecipe, removeFromCalender } from '../actions';
 import { capitalize } from '../utils/helpers';
@@ -65,6 +66,7 @@ class App extends Component {
 	};
 
 	render() {
+		const { isModalOpen } = this.state;
 		const { calendar, boundRemoveFromCalendar } = this.props;
 		/**
 		 * The meals to be displayed the information of.
@@ -131,6 +133,15 @@ class App extends Component {
 						))}
 					</div>
 				</div>
+
+				{/* the modal for updating meals fo the day. */}
+				<Modal
+					className="modal"
+					overlayClassName="overlay"
+					isOpen={isModalOpen}
+					onRequestClose={this.closeModal}
+					contentLabel="Modal"
+				/>
 			</div>
 		);
 	}
