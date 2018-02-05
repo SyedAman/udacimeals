@@ -81,10 +81,12 @@ class App extends Component {
 									<li key={mealType} className="meal">
 										{meals[mealType] ? (
 											<div className="food-item">
+												{/* Shows a picture of the meal for the day. */}
 												<img
 													src={meals[mealType].image}
 													alt={meals[mealType].label}
 												/>
+												{/* Removes the meal from the day. */}
 												<button
 													onClick={() =>
 														boundRemoveFromCalendar({ mealType, day })
