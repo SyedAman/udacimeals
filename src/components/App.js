@@ -143,12 +143,20 @@ class App extends Component {
 					onRequestClose={this.closeModal}
 					contentLabel="Modal"
 				>
+					{/* Display spinner when making async calls to the Edamam API. */}
 					<Loading
 						delay={200}
 						type="spin"
 						color="#4fd65d"
 						className="loading"
 					/>
+
+					{/* Display the main form/input/content of the modal. */}
+					<div className="search-container">
+						<h3 className="subheader">
+							Find a meal for {capitalize(this.state.day)} {this.state.mealType}
+						</h3>
+					</div>
 				</Modal>
 			</div>
 		);
