@@ -7,12 +7,27 @@ import { capitalize } from '../utils/helpers';
 import '../App.css';
 
 class App extends Component {
+	/**
+	 * Local state.
+	 * @type {Object}
+	 */
 	state = {
 		isLoading: false,
 		isModalOpen: false,
 		meal: null,
 		day: null,
 		food: null,
+	};
+
+	/**
+	 * Opens the modal to edit meals for a day.
+	 * @method openModal
+	 * @param  {Object} meal - The meal (breakfast, lunch, or dinner) to update.
+	 * @param  {Object} day - The day of the week to update the meal for.
+	 * @return {Undefined}
+	 */
+	openModal = ({ meal, day }) => {
+		this.setState(() => ({ isModalOpen: true, meal, day }));
 	};
 
 	render() {
