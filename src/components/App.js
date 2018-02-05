@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o';
 import Modal from 'react-modal';
 import Loading from 'react-loading';
+import ArrowRightIcon from 'react-icons/lib/fa/arrow-circle-right';
 
 import { addRecipe, removeFromCalender } from '../actions';
 import { capitalize } from '../utils/helpers';
@@ -156,6 +157,17 @@ class App extends Component {
 						<h3 className="subheader">
 							Find a meal for {capitalize(this.state.day)} {this.state.mealType}
 						</h3>
+						<div className="search">
+							<input
+								className="food-input"
+								type="text"
+								placeholder="Search Foods"
+								ref={input => (this.input = input)}
+							/>
+							<button className="icon-btn">
+								<ArrowRightIcon size={30} />
+							</button>
+						</div>
 					</div>
 				</Modal>
 			</div>
