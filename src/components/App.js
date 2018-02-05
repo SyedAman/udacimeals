@@ -30,6 +30,20 @@ class App extends Component {
 		this.setState(() => ({ isModalOpen: true, meal, day }));
 	};
 
+	/**
+	 * Closes the modal for editing meals for a day.
+	 * @method closeModal
+	 * @return {Undefined}
+	 */
+	closeModal = () => {
+		this.setState(() => ({
+			isModalOpen: false,
+			meal: null,
+			day: null,
+			food: null,
+		}));
+	};
+
 	render() {
 		const { calendar, boundRemoveFromCalendar } = this.props;
 		/**
