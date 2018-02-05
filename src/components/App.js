@@ -12,10 +12,30 @@ class App extends Component {
 	 * @type {Object}
 	 */
 	state = {
+		/**
+		 * Whether calls to the API is in progress.
+		 * @type {Boolean}
+		 */
 		isLoading: false,
+		/**
+		 * Whether the modal to update meals is open or not.
+		 * @type {Boolean}
+		 */
 		isModalOpen: false,
+		/**
+		 * Breakfast, lunch, or dinner.
+		 * @type {String}
+		 */
 		mealType: null,
+		/**
+		 * Any day of the week. Monday - Sunday.
+		 * @type {String}
+		 */
 		day: null,
+		/**
+		 * Any kind of recipe.
+		 * @type {String}
+		 */
 		food: null,
 	};
 
@@ -96,6 +116,8 @@ class App extends Component {
 												</button>
 											</div>
 										) : (
+											// opens the modal to add in a meal
+											// indicate no meal
 											<button
 												onClick={() => this.openModal({ mealType, day })}
 												className="icon-btn"
