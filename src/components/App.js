@@ -96,7 +96,10 @@ class App extends Component {
 												</button>
 											</div>
 										) : (
-											<button className="icon-btn">
+											<button
+												onClick={() => this.openModal({ mealType, day })}
+												className="icon-btn"
+											>
 												<CalendarIcon size={30} />
 											</button>
 										)}
