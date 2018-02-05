@@ -92,7 +92,7 @@ class App extends Component {
 	};
 
 	render() {
-		const { isModalOpen } = this.state;
+		const { isModalOpen, isLoading } = this.state;
 		const { calendar, boundRemoveFromCalendar } = this.props;
 		/**
 		 * The meals to be displayed the information of.
@@ -168,30 +168,35 @@ class App extends Component {
 					onRequestClose={this.closeModal}
 					contentLabel="Modal"
 				>
-					{/* Display spinner when making async calls to the Edamam API. */}
-					<Loading
-						delay={200}
-						type="spin"
-						color="#4fd65d"
-						className="loading"
-					/>
-
-					{/* Display the main form/input/content of the modal. */}
-					<div className="search-container">
-						<h3 className="subheader">
-							Find a meal for {capitalize(this.state.day)} {this.state.mealType}
-						</h3>
-						<div className="search">
-							<input
-								className="food-input"
-								type="text"
-								placeholder="Search Foods"
-								ref={input => (this.input = input)}
+					<div>
+						{isLoading ? (
+							// Display spinner when making async calls to the Edamam API.
+							<Loading
+								delay={200}
+								type="spin"
+								color="#4fd65d"
+								className="loading"
 							/>
-							<button onClick={this.searchForFood} className="icon-btn">
-								<ArrowRightIcon size={30} />
-							</button>
-						</div>
+						) : (
+							// Display the main form/input/content of the modal.
+							<div className="search-container">
+								<h3 className="subheader">
+									Find a meal for {capitalize(this.state.day)}{' '}
+									{this.state.mealType}
+								</h3>
+								<div className="search">
+									<input
+										className="food-input"
+										type="text"
+										placeholder="Search Foods"
+										ref={input => (this.input = input)}
+									/>
+									<button onClick={this.searchForFood} className="icon-btn">
+										<ArrowRightIcon size={30} />
+									</button>
+								</div>
+							</div>
+						)}
 					</div>
 				</Modal>
 			</div>
