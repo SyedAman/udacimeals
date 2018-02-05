@@ -14,7 +14,7 @@ class App extends Component {
 	state = {
 		isLoading: false,
 		isModalOpen: false,
-		meal: null,
+		mealType: null,
 		day: null,
 		food: null,
 	};
@@ -26,8 +26,8 @@ class App extends Component {
 	 * @param  {Object} day - The day of the week to update the meal for.
 	 * @return {Undefined}
 	 */
-	openModal = ({ meal, day }) => {
-		this.setState(() => ({ isModalOpen: true, meal, day }));
+	openModal = ({ mealType, day }) => {
+		this.setState(() => ({ isModalOpen: true, mealType, day }));
 	};
 
 	/**
