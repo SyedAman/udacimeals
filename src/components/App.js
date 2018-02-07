@@ -6,6 +6,7 @@ import Loading from 'react-loading';
 import ArrowRightIcon from 'react-icons/lib/fa/arrow-circle-right';
 
 import { addRecipe, removeFromCalender } from '../actions';
+import FoodList from './FoodList';
 import { capitalize } from '../utils/helpers';
 import '../App.css';
 import { fetchRecipes } from '../utils/api';
@@ -46,7 +47,7 @@ class App extends Component {
 	/**
 	 * Opens the modal to edit meals for a day.
 	 * @method openModal
-	 * @param  {Object} meal - The meal (breakfast, lunch, or dinner) to update.
+	 * @param  {Object} mealType - The meal (breakfast, lunch, or dinner) to update.
 	 * @param  {Object} day - The day of the week to update the meal for.
 	 * @return {Undefined}
 	 */
@@ -64,7 +65,7 @@ class App extends Component {
 			isModalOpen: false,
 			meal: null,
 			day: null,
-			food: null,
+			recipeSearchResults: null,
 		}));
 	};
 
@@ -84,16 +85,16 @@ class App extends Component {
 			this.setState(() => ({ isLoading: true }));
 
 			// search the food using the edamam api
-			const food = await fetchRecipes(this.input.value);
-			this.setState(() => ({ food, isLoading: false }));
+			const recipeSearchResults = await fetchRecipes(this.input.value);
+			this.setState(() => ({ recipeSearchResults, isLoading: false }));
 		} catch (error) {
 			throw new Error('failed to search for food!', error);
 		}
 	};
 
 	render() {
-		const { isModalOpen, isLoading, food } = this.state;
-		const { calendar, boundRemoveFromCalendar } = this.props;
+		const { isModalOpen, isLoading, recipeSearchResults } = this.state;
+		const { calendar, boundAddRecipe, boundRemoveFromCalendar } = this.props;
 		/**
 		 * The meals to be displayed the information of.
 		 * @type {Array}
@@ -200,7 +201,23 @@ class App extends Component {
 									</button>
 
 									{/* Display food from search results. */}
-									{food && <h1>FOOD!!!!</h1>}
+									{recipeSearchResults && (
+										<FoodList
+											food={recipeSearchResults}
+											onSelect={recipe => {
+												// add the recipe to the calendar
+												boundAddRecipe({
+													recipe,
+													day: this.state.day,
+													meal: this.state.mealType,
+												});
+
+												// close the modal after selecting a recipe to add to
+												// the day
+												this.closeModal();
+											}}
+										/>
+									)}
 								</div>
 							</div>
 						)}
