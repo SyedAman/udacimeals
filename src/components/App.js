@@ -63,7 +63,7 @@ class App extends Component {
 	closeModal = () => {
 		this.setState(() => ({
 			isModalOpen: false,
-			meal: null,
+			mealType: null,
 			day: null,
 			recipeSearchResults: null,
 		}));
