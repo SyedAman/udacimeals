@@ -138,7 +138,7 @@ class App extends Component {
 												{/* Removes the meal from the day. */}
 												<button
 													onClick={() =>
-														boundRemoveFromCalendar({ mealType, day })
+														boundRemoveFromCalendar({ meal: mealType, day })
 													}
 												>
 													Clear
