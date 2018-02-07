@@ -190,10 +190,14 @@ class App extends Component {
 								{/* Search bar. */}
 								<div className="search">
 									<input
-										className="food-input"
-										type="text"
-										placeholder="Search Foods"
 										ref={input => (this.input = input)}
+										// allow users to press enter to search
+										onKeyPress={event => {
+											if (event.key === 'Enter') this.searchForFood(event);
+										}}
+										type="text"
+										className="food-input"
+										placeholder="Search Foods"
 									/>
 									{/* Button that initiates searching. */}
 									<button onClick={this.searchForFood} className="icon-btn">
