@@ -92,7 +92,7 @@ class App extends Component {
 	};
 
 	render() {
-		const { isModalOpen, isLoading } = this.state;
+		const { isModalOpen, isLoading, food } = this.state;
 		const { calendar, boundRemoveFromCalendar } = this.props;
 		/**
 		 * The meals to be displayed the information of.
@@ -180,10 +180,13 @@ class App extends Component {
 						) : (
 							// Display the main form/input/content of the modal.
 							<div className="search-container">
+								{/* Header. */}
 								<h3 className="subheader">
 									Find a meal for {capitalize(this.state.day)}{' '}
 									{this.state.mealType}
 								</h3>
+
+								{/* Search bar. */}
 								<div className="search">
 									<input
 										className="food-input"
@@ -191,9 +194,13 @@ class App extends Component {
 										placeholder="Search Foods"
 										ref={input => (this.input = input)}
 									/>
+									{/* Button that initiates searching. */}
 									<button onClick={this.searchForFood} className="icon-btn">
 										<ArrowRightIcon size={30} />
 									</button>
+
+									{/* Display food from search results. */}
+									{food && <h1>FOOD!!!!</h1>}
 								</div>
 							</div>
 						)}
