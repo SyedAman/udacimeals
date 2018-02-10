@@ -26,7 +26,7 @@ class App extends Component {
 		 * Whether the modal to update meals is open or not.
 		 * @type {Boolean}
 		 */
-		isModalOpen: false,
+		isRecipeModalOpen: false,
 		/**
 		 * Breakfast, lunch, or dinner.
 		 * @type {String}
@@ -46,26 +46,26 @@ class App extends Component {
 
 	/**
 	 * Opens the modal to edit meals for a day.
-	 * @method openModal
+	 * @method openRecipeModal
 	 * @param  {Object} mealType - The meal (breakfast, lunch, or dinner) to update.
 	 * @param  {Object} day - The day of the week to update the meal for.
 	 * @return {Undefined}
 	 */
-	openModal = ({ mealType, day }) => {
-		this.setState(() => ({ isModalOpen: true, mealType, day }));
+	openRecipeModal = ({ mealType, day }) => {
+		this.setState(() => ({ isRecipeModalOpen: true, mealType, day }));
 	};
 
 	/**
 	 * Closes the modal for editing meals for a day.
-	 * @method closeModal
+	 * @method closeRecipeModal
 	 * @return {Undefined}
 	 */
-	closeModal = () => {
+	closeRecipeModal = () => {
 		this.setState(() => ({
-			isModalOpen: false,
+			isRecipeModalOpen: false,
 			mealType: null,
 			day: null,
-			recipeSearchResults: null,
+			recipeSearchQueryResults: null,
 		}));
 	};
 
@@ -85,9 +85,9 @@ class App extends Component {
 			this.setState(() => ({ isSearchingForRecipes: true }));
 
 			// search the recipe using the edamam api
-			const recipeSearchResults = await fetchRecipes(this.input.value);
+			const recipeSearchQueryResults = await fetchRecipes(this.input.value);
 			this.setState(() => ({
-				recipeSearchResults,
+				recipeSearchQueryResults,
 				isSearchingForRecipes: false,
 			}));
 		} catch (error) {
@@ -97,11 +97,11 @@ class App extends Component {
 
 	render() {
 		const {
-			isModalOpen,
+			isRecipeModalOpen,
 			isSearchingForRecipes,
-			recipeSearchResults,
+			recipeSearchQueryResults,
 		} = this.state;
-		const { calendar, boundAddRecipe, boundRemoveFromCalendar } = this.props;
+		const { calendar, addRecipeAction, removeFromCalendarAction } = this.props;
 		/**
 		 * The meals to be displayed the information of.
 		 * @type {Array}
@@ -145,7 +145,7 @@ class App extends Component {
 												{/* Removes the meal from the day. */}
 												<button
 													onClick={() =>
-														boundRemoveFromCalendar({ meal: mealType, day })
+														removeFromCalendarAction({ meal: mealType, day })
 													}
 												>
 													Clear
@@ -155,7 +155,7 @@ class App extends Component {
 											// opens the modal to add in a meal
 											// indicate no meal
 											<button
-												onClick={() => this.openModal({ mealType, day })}
+												onClick={() => this.openRecipeModal({ mealType, day })}
 												className="icon-btn"
 											>
 												<CalendarIcon size={30} />
@@ -172,8 +172,8 @@ class App extends Component {
 				<Modal
 					className="modal"
 					overlayClassName="overlay"
-					isOpen={isModalOpen}
-					onRequestClose={this.closeModal}
+					isOpen={isRecipeModalOpen}
+					onRequestClose={this.closeRecipeModal}
 					contentLabel="Modal"
 				>
 					<div>
@@ -212,12 +212,12 @@ class App extends Component {
 									</button>
 
 									{/* Display recipe from search results. */}
-									{recipeSearchResults && (
+									{recipeSearchQueryResults && (
 										<RecipeList
-											recipe={recipeSearchResults}
+											recipe={recipeSearchQueryResults}
 											onSelect={recipe => {
 												// add the recipe to the calendar
-												boundAddRecipe({
+												addRecipeAction({
 													recipe,
 													day: this.state.day,
 													meal: this.state.mealType,
@@ -225,7 +225,7 @@ class App extends Component {
 
 												// close the modal after selecting a recipe to add to
 												// the day
-												this.closeModal();
+												this.closeRecipeModal();
 											}}
 										/>
 									)}
@@ -258,11 +258,11 @@ const mapStateToProps = ({ calendar }) => ({
  */
 const mapDispatchToProps = dispatch => ({
 	// add a recipe to a meal for a specified day in the calendar
-	boundAddRecipe: ({ day, recipe, meal }) =>
+	addRecipeAction: ({ day, recipe, meal }) =>
 		dispatch(addRecipe({ day, recipe, meal })),
 
 	// remove a recipe from a meal from a specified day in the calendar
-	boundRemoveFromCalendar: ({ day, meal }) =>
+	removeFromCalendarAction: ({ day, meal }) =>
 		dispatch(removeFromCalender({ day, meal })),
 });
 

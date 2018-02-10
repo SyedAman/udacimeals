@@ -1,9 +1,11 @@
 import React from 'react';
 
-const ShoppingList = ({ shoppingCart }) => (
+const ShoppingList = ({ shoppingCartItems }) => (
 	<div className="ingredients-list">
 		<h3 className="subheader">Your Shopping List</h3>
-		<ul>{shoppingCart.map(cartItem => <li key={cartItem}>{cartItem}</li>)}</ul>
+		<ul>
+			{shoppingCartItems.map(cartItem => <li key={cartItem}>{cartItem}</li>)}
+		</ul>
 	</div>
 );
 
