@@ -42,6 +42,7 @@ class App extends Component {
 		 * @type {String}
 		 */
 		recipe: null,
+		isIngredientsModalOpen: false,
 	};
 
 	/**
@@ -94,6 +95,12 @@ class App extends Component {
 			throw new Error('failed to search for recipe!', error);
 		}
 	};
+
+	openIngredientsModal = () =>
+		this.setState(() => ({ isIngredientsModalOpen: true }));
+
+	closeIngredientsModal = () =>
+		this.setState(() => ({ isIngredientsModalOpen: false }));
 
 	render() {
 		const {
