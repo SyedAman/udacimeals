@@ -21,7 +21,7 @@ class App extends Component {
 		 * Whether calls to the API is in progress.
 		 * @type {Boolean}
 		 */
-		isLoading: false,
+		isSearchingForRecipes: false,
 		/**
 		 * Whether the modal to update meals is open or not.
 		 * @type {Boolean}
@@ -82,18 +82,25 @@ class App extends Component {
 		event.preventDefault();
 
 		try {
-			this.setState(() => ({ isLoading: true }));
+			this.setState(() => ({ isSearchingForRecipes: true }));
 
 			// search the food using the edamam api
 			const recipeSearchResults = await fetchRecipes(this.input.value);
-			this.setState(() => ({ recipeSearchResults, isLoading: false }));
+			this.setState(() => ({
+				recipeSearchResults,
+				isSearchingForRecipes: false,
+			}));
 		} catch (error) {
 			throw new Error('failed to search for food!', error);
 		}
 	};
 
 	render() {
-		const { isModalOpen, isLoading, recipeSearchResults } = this.state;
+		const {
+			isModalOpen,
+			isSearchingForRecipes,
+			recipeSearchResults,
+		} = this.state;
 		const { calendar, boundAddRecipe, boundRemoveFromCalendar } = this.props;
 		/**
 		 * The meals to be displayed the information of.
@@ -170,7 +177,7 @@ class App extends Component {
 					contentLabel="Modal"
 				>
 					<div>
-						{isLoading ? (
+						{isSearchingForRecipes ? (
 							// Display spinner when making async calls to the Edamam API.
 							<Loading
 								delay={200}
