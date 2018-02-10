@@ -117,6 +117,16 @@ class App extends Component {
 
 		return (
 			<div className="container">
+				<div className="nav">
+					<h1 className="header">UdaciMeals</h1>
+					<button
+						className="shopping-list"
+						onClick={() => this.openIngredientsModal()}
+					>
+						Shopping List
+					</button>
+				</div>
+
 				{/* display the different meal types in the x axis */}
 				<ul className="meal-types">
 					{mealOrder.map(mealType => (
