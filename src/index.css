@@ -117,7 +117,7 @@ li {
   text-align: center;
 }
 
-.food-input {
+.recipe-input {
   width: 90%;
   padding: 10px;
   font-size: 1em;
@@ -138,13 +138,13 @@ li {
   padding: 50px 0;
 }
 
-.food-list {
+.recipe-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.food-list li {
+.recipe-list li {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -153,7 +153,7 @@ li {
   cursor: pointer;
 }
 
-.food-list img {
+.recipe-list img {
   width: 100px;
   height: 100px;
   margin: 0 auto;
@@ -171,20 +171,20 @@ li {
   padding: 5px;
 }
 
-.food-item {
+.recipe-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.food-item img {
+.recipe-item img {
   width: 100px;
   height: 100px;
   border-radius: 3px;
 }
 
-.food-item button {
+.recipe-item button {
   background: none;
   border: none;
   text-decoration: underline;

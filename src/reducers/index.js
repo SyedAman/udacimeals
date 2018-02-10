@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
 import calendarReducer from './calendarReducer';
-import foodReducer from './foodReducer';
+import recipeReducer from './recipeReducer';
 
 export default combineReducers({
 	calendar: calendarReducer,
-	food: foodReducer,
+	recipe: recipeReducer,
 });

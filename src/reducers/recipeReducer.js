@@ -1,14 +1,14 @@
 import { ADD_RECIPE } from '../actions';
 
 /**
- * Returns an updated version of the state in relation to food state, based on
- * the food action received.
- * @method foodReducer
+ * Returns an updated version of the state in relation to recipe state, based on
+ * the recipe action received.
+ * @method recipeReducer
  * @param  {Object} [state={}] - The redux store.
  * @param  {Object} action - The payload.
  * @return {Object} - An updated version of the state.
  */
-const foodReducer = (state = {}, action) => {
+const recipeReducer = (state = {}, action) => {
 	const { recipe } = action;
 
 	switch (action.type) {
@@ -22,4 +22,4 @@ const foodReducer = (state = {}, action) => {
 	}
 };
 
-export default foodReducer;
+export default recipeReducer;

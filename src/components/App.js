@@ -6,7 +6,7 @@ import Loading from 'react-loading';
 import ArrowRightIcon from 'react-icons/lib/fa/arrow-circle-right';
 
 import { addRecipe, removeFromCalender } from '../actions';
-import FoodList from './FoodList';
+import RecipeList from './RecipeList';
 import { capitalize } from '../utils/helpers';
 import '../App.css';
 import { fetchRecipes } from '../utils/api';
@@ -41,7 +41,7 @@ class App extends Component {
 		 * Any kind of recipe.
 		 * @type {String}
 		 */
-		food: null,
+		recipe: null,
 	};
 
 	/**
@@ -70,12 +70,12 @@ class App extends Component {
 	};
 
 	/**
-	 * Searches for the queried food using the edamam api.
-	 * @method searchForFood
+	 * Searches for the queried recipe using the edamam api.
+	 * @method searchForRecipe
 	 * @param  {Object} event - Native DOM event.
 	 * @return {Undefined}
 	 */
-	searchForFood = async event => {
+	searchForRecipe = async event => {
 		// don't search if user hasn't typed anything
 		if (!this.input.value) return;
 
@@ -84,14 +84,14 @@ class App extends Component {
 		try {
 			this.setState(() => ({ isSearchingForRecipes: true }));
 
-			// search the food using the edamam api
+			// search the recipe using the edamam api
 			const recipeSearchResults = await fetchRecipes(this.input.value);
 			this.setState(() => ({
 				recipeSearchResults,
 				isSearchingForRecipes: false,
 			}));
 		} catch (error) {
-			throw new Error('failed to search for food!', error);
+			throw new Error('failed to search for recipe!', error);
 		}
 	};
 
@@ -136,7 +136,7 @@ class App extends Component {
 								{mealOrder.map(mealType => (
 									<li key={mealType} className="meal">
 										{meals[mealType] ? (
-											<div className="food-item">
+											<div className="recipe-item">
 												{/* Shows a picture of the meal for the day. */}
 												<img
 													src={meals[mealType].image}
@@ -200,21 +200,21 @@ class App extends Component {
 										ref={input => (this.input = input)}
 										// allow users to press enter to search
 										onKeyPress={event => {
-											if (event.key === 'Enter') this.searchForFood(event);
+											if (event.key === 'Enter') this.searchForRecipe(event);
 										}}
 										type="text"
-										className="food-input"
-										placeholder="Search Foods"
+										className="recipe-input"
+										placeholder="Search Recipes"
 									/>
 									{/* Button that initiates searching. */}
-									<button onClick={this.searchForFood} className="icon-btn">
+									<button onClick={this.searchForRecipe} className="icon-btn">
 										<ArrowRightIcon size={30} />
 									</button>
 
-									{/* Display food from search results. */}
+									{/* Display recipe from search results. */}
 									{recipeSearchResults && (
-										<FoodList
-											food={recipeSearchResults}
+										<RecipeList
+											recipe={recipeSearchResults}
 											onSelect={recipe => {
 												// add the recipe to the calendar
 												boundAddRecipe({
