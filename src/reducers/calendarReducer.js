@@ -59,7 +59,7 @@ const calendarReducer = (state = initialCalenderState, action) => {
 				...state,
 				[day]: {
 					...state[day],
-					[meal]: recipe.label,
+					[meal]: { label: recipe.label, image: recipe.image },
 				},
 			};
 		// remove recipe from a meal in a calendar day
