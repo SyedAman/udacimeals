@@ -7,6 +7,7 @@ import ArrowRightIcon from 'react-icons/lib/fa/arrow-circle-right';
 
 import { addRecipe, removeFromCalender } from '../actions';
 import RecipeList from './RecipeList';
+import ShoppingList from './ShoppingList';
 import { capitalize } from '../utils/helpers';
 import '../App.css';
 import { fetchRecipes } from '../utils/api';
@@ -102,11 +103,30 @@ class App extends Component {
 	closeIngredientsModal = () =>
 		this.setState(() => ({ isIngredientsModalOpen: false }));
 
+	generateShoppingCartItems = () =>
+		this.props.calendar
+			.reduce((result, { meals }) => {
+				const { breakfast, lunch, dinner } = meals;
+
+				breakfast && result.push(breakfast);
+				lunch && result.push(lunch);
+				dinner && result.push(dinner);
+
+				return result;
+			}, [])
+
+			.reduce(
+				(shoppingCartItems, { ingredientLines }) =>
+					shoppingCartItems.concat(ingredientLines),
+				[],
+			);
+
 	render() {
 		const {
 			isRecipeModalOpen,
 			isSearchingForRecipes,
 			recipeSearchQueryResults,
+			isIngredientsModalOpen,
 		} = this.state;
 		const { calendar, addRecipeAction, removeFromCalendarAction } = this.props;
 		/**
@@ -250,6 +270,20 @@ class App extends Component {
 							</div>
 						)}
 					</div>
+				</Modal>
+
+				<Modal
+					className="modal"
+					overlayClassName="overlay"
+					isOpen={isIngredientsModalOpen}
+					onRequestClose={() => this.closeIngredientsModal()}
+					contentLabel="Modal"
+				>
+					{isIngredientsModalOpen && (
+						<ShoppingList
+							shoppingCartItems={this.generateShoppingCartItems()}
+						/>
+					)}
 				</Modal>
 			</div>
 		);
