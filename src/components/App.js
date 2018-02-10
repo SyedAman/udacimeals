@@ -103,7 +103,7 @@ class App extends Component {
 	closeIngredientsModal = () =>
 		this.setState(() => ({ isIngredientsModalOpen: false }));
 
-	generateShoppingCartItems = () =>
+	generateShoppingListItems = () =>
 		this.props.calendar
 			.reduce((result, { meals }) => {
 				const { breakfast, lunch, dinner } = meals;
@@ -116,8 +116,8 @@ class App extends Component {
 			}, [])
 
 			.reduce(
-				(shoppingCartItems, { ingredientLines }) =>
-					shoppingCartItems.concat(ingredientLines),
+				(shoppingListItems, { ingredientLines }) =>
+					shoppingListItems.concat(ingredientLines),
 				[],
 			);
 
@@ -281,7 +281,7 @@ class App extends Component {
 				>
 					{isIngredientsModalOpen && (
 						<ShoppingList
-							shoppingCartItems={this.generateShoppingCartItems()}
+							shoppingListItems={this.generateShoppingListItems()}
 						/>
 					)}
 				</Modal>

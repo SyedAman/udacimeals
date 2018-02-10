@@ -1,10 +1,10 @@
 import React from 'react';
 
-const ShoppingList = ({ shoppingCartItems }) => (
+const ShoppingList = ({ shoppingListItems }) => (
 	<div className="ingredients-list">
 		<h3 className="subheader">Your Shopping List</h3>
 		<ul>
-			{shoppingCartItems.map(cartItem => <li key={cartItem}>{cartItem}</li>)}
+			{shoppingListItems.map(listItem => <li key={listItem}>{listItem}</li>)}
 		</ul>
 	</div>
 );
